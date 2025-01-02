@@ -6,26 +6,27 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: c89798c25b888288c3ee9f367540d785fc4e1c68336d2ee8400bb14b5672e695
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
   entry_points:
     - asfsmd = asfsmd.cli:main
 
 requirements:
   host:
-    - python >=3.7
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - fsspec
     - requests
     - aiohttp
-    - importlib_metadata >=4.4
+    - importlib-metadata >=4.4
     - asf_search
     - tqdm
     - argcomplete
@@ -35,6 +36,7 @@ test:
     - asfsmd
   requires:
     - pip
+    - python {{ python_min }}
   commands:
     - asfsmd -h
     - pip check
