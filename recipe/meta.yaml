@@ -20,12 +20,13 @@ requirements:
   host:
     - python {{ python_min }}
     - pip
+    - setuptools
   run:
     - python >={{ python_min }}
     - fsspec
     - requests
     - aiohttp
-    - importlib_metadata >=4.4
+    - importlib-metadata >=4.4
     - asf_search
     - tqdm
     - argcomplete
